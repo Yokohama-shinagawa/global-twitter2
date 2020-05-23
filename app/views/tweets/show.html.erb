@@ -1,0 +1,70 @@
+<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<%= link_to user_path(current_user) do %>
+							<h3><%= current_user.name %></h3>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<h4>ツイート詳細</h4>
+				<div class="tweet-box panel panel-default">
+					<div class="panel-body">
+						<%= link_to user_path(@tweet.user) do %>
+							<h4 class="font-weight-bold"><%= @tweet.user.name %></h4>
+						<% end %>
+						<h4 class="font-weight-bold"><%= @tweet.user.name %></h4>
+						<div>
+							<%= @tweet.body %>
+						</div>
+						<div>
+							<%= link_to new_tweet_comment_path(@tweet) do %>
+								<div class="fa fa-reply" aria-hidden="true" style="margin-right: 10px; color: #000000;"></div>
+							<% end %>
+						</div>
+						<div>
+							<%= @tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
+						</div>
+						<div>
+							<%= link_to "戻る", @back %>
+							<% if @tweet.user == current_user %>
+                				<%= link_to "ツイートを編集", edit_tweet_path(@tweet) %>
+                				<%= link_to "ツイートを削除", tweet_path(@tweet), method: :delete %>
+                			<% end %>
+
+						</div>
+					</div>
+				</div>
+				<% @tweet.comments.each do |comment| %>
+		<div class="comment-box panel panel-default">
+			<div class="panel-body">
+				<div>
+					
+						<h4 class="font-weight-bold"><%= comment.user.name %></h4>
+					
+					<div>
+						<%= comment.body %>
+					</div>
+					<div>
+						<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+					</div>
+					<div>
+						<% if comment.user == current_user %>
+							<%= link_to "コメントを編集", edit_tweet_comment_path(@tweet, comment) %>
+							<%= link_to "コメントを削除", tweet_comment_path(@tweet, comment), method: :delete %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+
+			</div>
+			
+		</div>
+</div>
+

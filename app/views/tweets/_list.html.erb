@@ -1,0 +1,18 @@
+<div class="tweet-box panel panel-default">
+		<div class="panel-body">
+			<div>
+		    <%= link_to user_path(tweet.user) do %>
+				<h4 class="font-weight-bold"><%= tweet.user.name %></h4>
+			<% end %>
+
+				<%= link_to tweet_path(tweet.id) do %>
+					<p>
+					    <%= tweet.body %>
+					</p>
+		    	<% end %>
+			</div>
+			<div>
+				<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
+			</div>
+		</div>
+</div>

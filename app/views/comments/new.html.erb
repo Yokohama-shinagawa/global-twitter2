@@ -1,0 +1,13 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-3 col-md-6">
+			<h3>新規コメント</h3>
+			<%= form_for ([@tweet, @comment]) do |f| %>
+				<div class="form-group">
+					<%= f.text_area :body, placeholder: "コメントを書いてください", :class=> "form-control" %>
+				</div>
+				<%= f.submit "投稿", :class => "btn btn-default" %>
+			<% end %>
+		</div>
+	</div>
+</div>

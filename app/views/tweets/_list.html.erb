@@ -14,5 +14,24 @@
 			<div>
 				<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
 			</div>
+			<div>
+	<%= link_to new_tweet_comment_path(tweet) do %>
+		コメントする
+	<% end %>
+	<% if user_signed_in? and tweet.favored?(current_user) %>
+		<%= link_to tweet_favorites_path(tweet), method: :delete do %>
+			<div class="fa fa-heart" style="color: #f0a0a0;"></div>
+		<% end %>
+	<% else %>
+		<%= link_to tweet_favorites_path(tweet), method: :post do %>
+			<div class="fa fa-heart" style="color: #a0a0a0;"></div>
+		<% end %>
+	<% end %>
+	<%= link_to favored_by_tweet_path(tweet) do %>
+		<%= tweet.favored_users.count %>
+	<% end %>
+
+	</div>
+
 		</div>
 </div>

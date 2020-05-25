@@ -12,6 +12,9 @@ class UsersController < ApplicationController
 	def followers
 	end
 
+	def fav
+		@tweets = @user.favoring_tweets.page(params[:page]).order(created_at: :desc).page(params[:page]).per(5)
+	end
 
 	private
         def users

@@ -43,12 +43,13 @@
 	                	
 	                	<% end %>
 					</li>
-					<li>
-					    <a>
-                			<p>いいね</p>
-                			<p class="text-center">7</p>
-                		</a>
-					</li>
+					<li class="<%= 'active' if current_page?(fav_user_path(@user)) %>">
+		<%= link_to fav_user_path(@user) do %>
+			<p>いいね</p>
+			<p class="text-center"><%= @user.favoring_tweets.count %> </p>
+		<% end %>
+	</li>
+
 					<li style="margin: 16px auto;">
 						<% if current_user != @user %>
 							<button type="button" class="btn btn-default navbar-btn">

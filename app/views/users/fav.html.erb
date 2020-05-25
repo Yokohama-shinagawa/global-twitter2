@@ -1,0 +1,13 @@
+<div class="container">
+<%= render 'users/tab' %>
+	<div class="row">
+		<div class="col-md-offset-3 col-md-9">
+    		<% @tweets.each do |tweet| %>
+				<%= render 'tweets/list', tweet: tweet %>
+		    <% end %>
+		    <div style="text-align: center">
+				<%= paginate @tweets, class: "pagenate" %>
+    		</div>
+		</div>
+	</div>
+</div>

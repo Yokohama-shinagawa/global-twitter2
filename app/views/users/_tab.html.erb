@@ -28,16 +28,20 @@
                     	<% end %>
                     </li>
 					<li>
-					    <a>
-                			<p>フォロー</p>
-                			<p class="text-center">3</p>
-                		</a>
+						<%= link_to followings_user_path(@user) do %>
+						   
+	                			<p>フォロー</p>
+	                			<p class="text-center"><%= @user.followings.count %></p>
+	                		
+	                	<% end %>
 					</li>
 					<li>
-					    <a>
-                			<p>フォロワー</p>
-                			<p class="text-center">2</p>
-                		</a>
+						<%= link_to followers_user_path(@user) do %>
+						  
+	                			<p>フォロワー</p>
+								<p class="text-center"><%= @user.followers.count %></p>
+	                	
+	                	<% end %>
 					</li>
 					<li>
 					    <a>
@@ -47,7 +51,13 @@
 					</li>
 					<li style="margin: 16px auto;">
 						<% if current_user != @user %>
-							
+							<button type="button" class="btn btn-default navbar-btn">
+								<% if current_user.following?(@user) %>
+									<%= link_to "解除", user_relationships_path(@user), method: :delete %>
+								<% else %>
+									<%= link_to "フォロー", user_relationships_path(@user), method: :post %>
+								<% end %>
+							</button>
 						<% end %>
 					</li>
 				</ul>

@@ -5,6 +5,13 @@ class UsersController < ApplicationController
 	def show
 		@tweets = @user.tweets.order(created_at: :desc)
 	end
+	
+	def followings
+	end
+
+	def followers
+	end
+
 
 	private
         def users

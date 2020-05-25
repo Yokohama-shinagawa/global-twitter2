@@ -1,0 +1,13 @@
+<div class="container">
+	<%= render 'users/tab' %>
+		<div class="row">
+			<div class="col-md-offset-3 col-md-9">
+				<h4>フォローされている人</h4>
+				<div class="row">
+					<% @user.followers.each do |user| %>
+						<%= render 'follow_button', user: user %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+</div>

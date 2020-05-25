@@ -1,0 +1,20 @@
+<div class="col-md-6">
+	<div class="panel panel-default">
+		<div class="panel-header" style="margin: 10px 10px;">
+			<%= link_to user_path(user) do %>
+				<%= user.name %>
+			<% end %>
+			<button type="button" class="btn btn-default" style="margin-left: 10px;">
+				<% if current_user != user %>
+					<% if current_user.following?(user) %>
+						<%= link_to "解除", user_relationships_path(user), method: :delete %>
+					<% else %>
+						<%= link_to "フォロー", user_relationships_path(user), method: :post %>
+					<% end %>
+				<% else %>
+					<%= link_to "マイページ", user_path(current_user) %>
+				<% end %>
+			</button>
+		</div>
+	</div>
+</div>

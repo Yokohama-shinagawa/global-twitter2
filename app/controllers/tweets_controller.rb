@@ -18,7 +18,8 @@ class TweetsController < ApplicationController
 	end
 	
 	def index
-		@tweets=Tweet.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(5)
+		following = current_user.followings.pluck(:following_id)
+		@tweets = Tweet.where("user_id IN (?) or user_id = ?", following, current_user.id).order(created_at: :desc).page(params[:page]).per(5)
 	end
 	
 	def show

@@ -10,59 +10,74 @@
 	</div>
 	<div class="col-md-9">
 	    <nav class="navbar navbar-default">
-	    	<div class="navbar-header">
-	  			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tab-collapse" aria-expanded="false">
-	  				<span class="sr-only">Toggle navigation</span>
-	  				<span class="icon-bar"></span>
-	  				<span class="icon-bar"></span>
-	  				<span class="icon-bar"></span>
-	  			</button>
-	  		</div>
+        <div class="container-fluid">
+          <div class="navbar-header">
 
-	  		<div class="collapse navbar-collapse"  id="tab-collapse">
-				<ul class="nav nav-tabs">
-					<li class="<%= 'active' if current_page?(user_path(@user)) %>">
+　    
+            
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#user-menu">
+	  			<span class="sr-only">Toggle navigation</span>
+	  			<span class="icon-bar"></span>
+	  			<span class="icon-bar"></span>
+	  			<span class="icon-bar"></span>
+	  		</button>
+            
+
+          </div>
+
+          
+         
+          <div class="collapse navbar-collapse user-menu" id="user-menu">
+            <ul class="nav navbar-nav navbar-left">
+            <li class="<%= 'active' if current_page?(user_path(@user)) %> ">
+            	
                     	<%= link_to user_path(@user) do %>
                     		<p>ツイート</p>
-                    		<p class="text-center"><%= @user.tweets.count %></p>
+                    		
                     	<% end %>
-                    </li>
-					<li>
+            </li>
+            <li class="<%= 'active' if current_page?(followings_user_path(@user)) %>">
 						<%= link_to followings_user_path(@user) do %>
 						   
 	                			<p>フォロー</p>
-	                			<p class="text-center"><%= @user.followings.count %></p>
+	                			
 	                		
 	                	<% end %>
 					</li>
-					<li>
+					<li class="<%= 'active' if current_page?(followers_user_path(@user)) %>">
 						<%= link_to followers_user_path(@user) do %>
 						  
 	                			<p>フォロワー</p>
-								<p class="text-center"><%= @user.followers.count %></p>
+							
 	                	
 	                	<% end %>
 					</li>
-					<li class="<%= 'active' if current_page?(fav_user_path(@user)) %>">
-		<%= link_to fav_user_path(@user) do %>
-			<p>いいね</p>
-			<p class="text-center"><%= @user.favoring_tweets.count %> </p>
-		<% end %>
-	</li>
+			<li class="<%= 'active' if current_page?(fav_user_path(@user)) %>">
+			<%= link_to fav_user_path(@user) do %>
+				<p>いいね</p>
+				
+			<% end %>
+		</li>
+		
+		<li>
+			<% if current_user != @user %>
+				<button type="button" class="btn btn-default navbar-btn">
+					<% if current_user.following?(@user) %>
+						<%= link_to "解除", user_relationships_path(@user), method: :delete %>
+					<% else %>
+						<%= link_to "フォロー", user_relationships_path(@user), method: :post %>
+					<% end %>
+				</button>
+			<% end %>
+		</li>
 
-					<li style="margin: 16px auto;">
-						<% if current_user != @user %>
-							<button type="button" class="btn btn-default navbar-btn">
-								<% if current_user.following?(@user) %>
-									<%= link_to "解除", user_relationships_path(@user), method: :delete %>
-								<% else %>
-									<%= link_to "フォロー", user_relationships_path(@user), method: :post %>
-								<% end %>
-							</button>
-						<% end %>
-					</li>
-				</ul>
-			</div>
-		</nav>
+            </ul>
+          </div>
+      
+        </div>
+      </nav>
 	</div>
 </div>
+
+
+

@@ -11,10 +11,7 @@ class FavoritesController < ApplicationController
 		redirect_back(fallback_location: root_path)
 	end
 	
-	def favored_by
-		@tweet = Tweet.find(params[:id])
-		@users = @tweet.favored_users
-	end
+	
 
 
 end

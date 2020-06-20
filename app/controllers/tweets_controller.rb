@@ -8,11 +8,14 @@ class TweetsController < ApplicationController
 	end
 	
 	def create
+		
 		@tweet = Tweet.new(tweet_params)
 		@tweet.user_id = current_user.id
 		if @tweet.save
+			flash[:success] = 'ツイートしました。'
 			redirect_to tweets_path
 		else
+			flash.now[:danger] = 'ツイートできませんでした。'
 			render 'tweets/new'
 		end
 	end
@@ -34,18 +37,28 @@ class TweetsController < ApplicationController
 		@tweet = Tweet.find(params[:id])
 	end
 	def update
+		tweet = Tweet.find(params[:id])
 		if @tweet.update(tweet_params)
+			flash[:success] = 'ツイートを変更しました。'
 			redirect_to tweet_path(@tweet)
 		else
+			flash.now[:danger] = 'ツイートを変更できませんでした。'
 			render 'tweets/edit'
 		end
 	end
 	def destroy
 		@tweet.destroy
+		flash[:success] = 'ツイートを削除しました。'
 		redirect_to tweets_path
 	end
 	def top
 		@tweets = Tweet.order(created_at: :desc).page(params[:page]).per(5)
+	end
+	
+	def favored_by
+		print("--------------------------")
+		@tweet = Tweet.find(params[:id])
+		@users = @tweet.favored_users
 	end
 	
 	private

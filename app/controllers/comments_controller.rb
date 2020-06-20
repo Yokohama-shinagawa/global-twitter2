@@ -11,7 +11,9 @@ class CommentsController < ApplicationController
 		@comment.tweet_id = @tweet.id
 		if @comment.save
 			redirect_to tweet_path(@tweet)
+			flash[:success] = 'コメントを投稿しました。'
 		else
+			flash.now[:danger] = 'コメントを投稿できませんでした。'
 			render :new
 		end
 	end
